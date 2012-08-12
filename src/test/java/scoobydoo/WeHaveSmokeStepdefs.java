@@ -5,8 +5,6 @@ import com.objogate.wl.swing.driver.ComponentDriver;
 import com.objogate.wl.swing.driver.JFrameDriver;
 import com.objogate.wl.swing.driver.JLabelDriver;
 import com.objogate.wl.swing.gesture.GesturePerformer;
-import cucumber.annotation.After;
-import cucumber.annotation.Before;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -19,28 +17,21 @@ public class WeHaveSmokeStepdefs {
 
     private ApplicationDriver driver;
 
-    @Before
-    public void setDriver(){
-        driver = new ApplicationDriver();
-    }
-
-    @After
-    public void confirm(){
-        driver.dispose();
-    }
-
     @Given("our application is running")
     public void ourApplicationIsRunning(){
         ApplicationLauncher.main();
+        driver = new ApplicationDriver();
     }
 
     @When("i access the application status")
     public void whatsTheStatus(){
+
     }
 
     @Then("i should get back a valid response")
     public void shouldHaveValidResponse(){
         driver.confirmApplicationStatusIs(ApplicationFrame.Status.RUNNING);
+        driver.dispose();
     }
 }
 
